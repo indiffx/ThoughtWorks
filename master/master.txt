@@ -1,1 +1,2 @@
 "This is master.txt file"
+"Adding the second line.."
