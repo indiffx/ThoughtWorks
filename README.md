@@ -1,2 +1,2 @@
-# ThoughtWorks
-Project repository for ThoughtWorks Pair Programming
+# Master Branch
+This is the default master branch including file master.txt
