@@ -1,112 +1,17 @@
-module.exports = function main(numStr) {
-	var
-		firstLine = "",
-		secondLine = "",
-		thirdLine = "";
+module.exports = function main(inputs) {
+    const [TAXI_FEE_PER_K, START_FEE, PARK_FEE_PER_MIN] = [0.8, 6, 0.25];
+    let 
+    	{distance, parkTime} = inputs,
+    	[extraFee, parkFee] = [0, 0];
+	parkFee = PARK_FEE_PER_MIN * parkTime; 
+	if (distance <= 2) {
+		return Math.round(START_FEE + parkFee);
+	}
+	if (distance > 8) {
+		extraFee = TAXI_FEE_PER_K * 0.5 * (distance - 8);
+	}
 
-    function mkZero() {
-    	firstLine +=  "._.";
-    	secondLine += "|.|";
-    	thirdLine +=  "|_|";
-
-    }
-
-    function mkOne() {
-    	firstLine +=  "...";
-    	secondLine += "..|";
-    	thirdLine +=  "..|";
-    }
-
-    function mkTwo() {
-    	firstLine +=  "._.";
-    	secondLine += "._|";
-    	thirdLine +=  "|_.";
-    }
-
-    function mkThree() {
-    	firstLine +=  "._.";
-    	secondLine += "._|";
-    	thirdLine +=  "._|";
-    }
-
-    function mkFour() {
-    	firstLine +=  "...";
-    	secondLine += "|_|";
-    	thirdLine +=  "..|";
-    }
-
-    function mkFive() {
-    	firstLine +=  "._.";
-    	secondLine += "|_.";
-    	thirdLine +=  "._|";
-    }
-
-    function mkSix() {
-    	firstLine +=  "._.";
-    	secondLine += "|_.";
-    	thirdLine +=  "|_|";
-    }
-
-    function mkSeven() {
-    	firstLine +=  "._.";
-    	secondLine += "..|";
-    	thirdLine +=  "..|";
-    }
-
-    function mkEight() {
-    	firstLine +=  "._.";
-    	secondLine += "|_|";
-    	thirdLine +=  "|_|";
-    }
-
-    function mkNine() {
-    	firstLine +=  "._.";
-    	secondLine += "|_|";
-    	thirdLine +=  "..|";
-    }
-
-    function pushByDigit(digit) {
-    	switch(digit) {
-    		case "0":
-    			mkZero();
-    			break;
-			case "1":
-				mkOne();
-				break;
-			case "2":
-				mkTwo();
-				break;
-			case "3":
-				mkThree();
-				break;
-			case "4":
-				mkFour();
-				break;
-			case "5":
-				mkFive();
-				break;
-			case "6":
-				mkSix();
-				break;
-			case "7":
-				mkSeven();
-				break;
-			case "8":
-				mkEight();
-				break;
-			case "9":
-				mkNine();
-				break;
-    	}
-    }
-
-    for (let i = 0; i < numStr.length - 1; i++) {
-    	pushByDigit(numStr[i]);
-    	firstLine += " ";
-    	secondLine += " ";
-    	thirdLine += " ";
-    }
-    pushByDigit(numStr[numStr.length - 1]);
-
-    return (firstLine + "\n" + secondLine + "\n" + thirdLine + "\n");
+	price = Math.round(START_FEE + TAXI_FEE_PER_K * 
+			(distance - 2) + extraFee + parkFee);
+    return price;
 };
